@@ -5,10 +5,13 @@
 	<title>Bouncing Box</title>
 	<script src="jquery.min.js"></script>
 	<style>
+	body {
+  background-color: aqua;
+	}
 		.box {
 			width: 70px;
 			height: 70px;
-			background-color: teal;
+			background-color: pink;
 			font-size: 300%;
 			text-align: center;
 			display: block;
@@ -58,26 +61,46 @@
 			//////////////////////////////////////////////////////////////////
 			
 			// TODO 2 - Variable declarations 
-			
-
-			
+			var positionX = 0;
+			var points = 0;
+			var speed = 10;
+           
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
 			it should move the Box to a new location. If the box drifts off the screen
 			turn it around! 
 			*/
 			function update() {
-				
+					positionX = positionX + speed;
+				    moveBoxTo(positionX);
+				    if (positionX > boardWidth) {
+				    	speed = -speed;
+                	}
+                	if (positionX < 0){
+                 	speed = -speed;
+                 }
+				    
 
 			};
-
+          
+            
 			/* 
 			This Function will be called each time the box is clicked. Each time it is called,
 			it should increase the points total, increase the speed, and move the box to
 			the left side of the screen.
 			*/
 			function handleBoxClick() {
-				
+				positionX =0;
+				  changeBoxText(points); 
+				  points = points + 1;
+				  speed = speed + 3;
+				  if (speed > 0){
+				  	speed = speed + 3
+				  }
+				  else if(speed < 0){
+				  	speed = speed - 3
+				  }
+				  
 
 
 			};

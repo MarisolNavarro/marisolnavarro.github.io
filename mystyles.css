@@ -1,8 +1,7 @@
-img{ 
-border: 1px solid aqua;
+<style>
+    img{ border: 1px solid aqua;
   border-radius: 50px 25px;
     }
-
     body {
         background: rgb(125, 198, 205);
         color: rgb(45, 45, 45);
@@ -32,7 +31,7 @@ border: 1px solid aqua;
         background: rgb(1, 100, 100);
         margin: 0 auto;
         display: flex;
-        padding: 10px;
+        padding: 5px;
     }
     nav header {
         display: flex;
@@ -74,3 +73,4 @@ border: 1px solid aqua;
     .interests header {
         font-size: 1.25em;
     }
+</style>
