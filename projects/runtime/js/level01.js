@@ -27,7 +27,9 @@ var level01 = function (window) {
         game.setDebugMode(true);
 
         // BEGIN EDITING YOUR CODE HERE
-       var hitZoneSize = 25;
+  
+       function createEnemy(x, y) {
+         var hitZoneSize = 25;
        var damageFromObstacle = 10;
        var sawBladeHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
        
@@ -35,6 +37,7 @@ var level01 = function (window) {
        sawBladeHitZone.y = 200;
        
        game.addGameItem(sawBladeHitZone); 
+       
        
         function createSawBlade(x, y) {
        x = sawBladeHitZone.x;
@@ -89,7 +92,21 @@ var level01 = function (window) {
               console.log('Halle has hit the enemy');
         }
         game.increaseScore(100);
-       
+}
+createEnemy(400,groundY-10);
+createEnemy(800,groundY-100);
+createEnemy(1200,groundY-50);
+
+        var reward =  game.createGameItem('reward',25);
+        var redSquare = draw.rect(50,50,'SlateBlue');
+        redSquare.x = -25;
+        redSquare.y = -25;
+        reward.addChild(redSquare);
+        reward.x = 400;
+        reward.y = groundY-50;
+        game.addGameItem(reward);
+        reward.velocityX = -1;
+        game.changeIntegrity(20);
         // DO NOT EDIT CODE BELOW HERE
     }
 };
