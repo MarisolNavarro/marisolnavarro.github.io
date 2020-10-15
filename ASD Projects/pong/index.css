@@ -1,0 +1,51 @@
+
+body {
+  background-color: rgb(8, 99, 8);
+}
+
+#board {
+  width: 440px;
+  height: 440px;
+  border: 1px solid white;
+  background-color: powderblue;
+  position: relative;
+}
+
+#leftPaddle {
+  background-color: teal;
+  width: 20px;
+  height: 80px;
+  position: absolute;
+  top: 100px;
+  left: 0px;
+  border-radius: 70px
+/*   left: 100px; */  /* Uncomment if you want to set a "starting" position */
+/*   top: 100px;  */  /* Uncomment if you want to set a "starting" position */
+}
+
+
+#rightPaddle {
+  background-color: rgb(247, 170, 224);
+  width: 20px;
+  height: 80px;
+  position: absolute;
+  top: 100px;
+  left: 420px;
+  border-radius: 70px
+/*   left: 100px; */  /* Uncomment if you want to set a "starting" position */
+/*   top: 100px;  */  /* Uncomment if you want to set a "starting" position */
+}
+
+
+#ball {
+  background-color: white;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 210px;
+  left: 210px;
+  border-radius: 10px
+/*   left: 100px; */  /* Uncomment if you want to set a "starting" position */
+/*   top: 100px;  */  /* Uncomment if you want to set a "starting" position */
+}
+
