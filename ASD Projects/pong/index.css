@@ -47,5 +47,18 @@ body {
   border-radius: 10px
 /*   left: 100px; */  /* Uncomment if you want to set a "starting" position */
 /*   top: 100px;  */  /* Uncomment if you want to set a "starting" position */
+function fromId(element){
+  
+  var obj = {};
+  obj.id = element ;
+  obj.x = Number($(element).css('left').replace(/[^-\d\.]/g, ''));
+  obj.y = Number($(element).css('top').replace(/[^-\d\.]/g, ''));
+  obj.width = $(element).width();
+  obj.height = $(element).height();
+  obj.speedX =  0;
+  obj.speedY = 0;
+  
+  return obj;
+
 }
 
