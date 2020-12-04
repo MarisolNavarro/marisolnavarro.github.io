@@ -29,13 +29,14 @@ function runProgram(){
    var speedY = 0; 
 
      var apple = {}
-     apple.x = 80;
-     apple.y = 0; 
+     apple.x = 100;
+     apple.y = 100; 
      apple.$element = $("#apple");
 
      
 var snake = [];
-snake.push(makeSnake("#snake200"));
+addNewSnakeToBoard();
+// snake.push(makeSnake("#snake0"));
 
 snake[0].x = 20;
 snake[0].y = 20;
@@ -56,11 +57,11 @@ console.log(snake);
   */
   function newFrame() {
     repositionGameItem();
-    redrawGameItem();
     doCollide();
+    redrawGameItem();
     doCollideTwo();
-    factoryFunction();
-    moveApple();
+    factoryFunction("#snake0");
+    // moveApple();
     
   }
   
@@ -95,32 +96,26 @@ console.log(snake);
 }
 //board collisions
 function doCollide(){
-    if(positionX > 400){
-        positionX = 400;
+    if(positionX > 420){
+        positionX = 420;
     }
-    else if(positionX < 20){
-        positionX = 20;
+    else if(positionX < 0){
+        positionX = 0;
     }
-    else if(positionY > 400){
-         positionY = 400;
+    else if(positionY > 420){
+         positionY = 420;
     }
-     else if(positionY < 20){
-        positionY = 20
+     else if(positionY < 0){
+        positionY = 0
     }
 }
 // apple collision
 function doCollideTwo(){
-    if(positionX > apple.x){
+    // moveApple();
+    if(positionX === apple.x && positionY === apple.y){
+        console.log(apple.y, positionY)
+        addNewSnakeToBoard();
         return moveApple() 
-    }
-    else if(positionX < apple.x){
-        return moveApple()
-    }
-    else if(positionY > apple.y){
-         return moveApple()
-    }
-     else if(positionY < apple.y){
-        return moveApple()
     }
 }
 //makeSnake
@@ -140,7 +135,7 @@ function addNewSnakeToBoard() {
 	// function, using the newID. We need to 
 	// prepend the "#" so that we can use it 
 	// with jQuery like so: $(ball.id)
-    var newSnake = Snake("#" + newID);
+    var newSnake = makeSnake("#" + newID);
     snake.push(newSnake);
 }
 function makeSnake(id){
@@ -159,10 +154,10 @@ apple.y = randomInteger( BOARD_SIZE/SQUARE_SIZE ) * SQUARE_SIZE;
 apple.$element.css("top", apple.y);
 apple.$element.css("left", apple.x);
   for (var i = 0; i < snake.length; i++) {
-		if ( doCollide(apple, snake[i]) ) {
-			moveApple();
-          break;
-		}
+		// if ( doCollide(apple, snake[i]) ) {
+		// 	moveApple();
+        //   break;
+		// }
     }
     
 }
@@ -176,10 +171,20 @@ apple.$element.css("left", apple.x);
   ////////////////////////////////////////////////////////////////////////////////
   
   function repositionGameItem() {
+      for( var i = snake.length-1; i >= 1; i--){
+          snake[i].x = snake[i-1].x;
+          snake[i].y = snake[i-1].y;
+         
+      }
+
       positionX += speedX
       positionY += speedY
   }
   function redrawGameItem() {
+      for( var i = snake.length-1; i >= 1; i--){
+            $(snake[i].id).css("left", snake[i].x);
+           $(snake[i].id).css("top", snake[i].y);
+      }
     $("#snake").css("left", positionX);
     $("#snake").css("top", positionY);
 }
