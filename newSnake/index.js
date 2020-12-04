@@ -144,6 +144,7 @@ function makeSnake(id){
   newPiece.width = $(".snake").width();        // sets width to 200
   newPiece.height = $(".snake").height();
   newPiece.x = 0;
+  newPiece.y = 0;
   return newPiece;
 }
 //moveApple
@@ -154,10 +155,10 @@ apple.y = randomInteger( BOARD_SIZE/SQUARE_SIZE ) * SQUARE_SIZE;
 apple.$element.css("top", apple.y);
 apple.$element.css("left", apple.x);
   for (var i = 0; i < snake.length; i++) {
-		// if ( doCollide(apple, snake[i]) ) {
-		// 	moveApple();
-        //   break;
-		// }
+		if ( doCollide(apple, snake[i]) ) {
+			moveApple();
+          break;
+		}
     }
     
 }
