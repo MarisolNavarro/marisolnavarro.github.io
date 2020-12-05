@@ -9,9 +9,15 @@ function runProgram(){
 
   // Constant Variables
   var FRAMES_PER_SECOND_INTERVAL = 1000 / 60;
-  
+
+   var KEY = { 
+  "W": 87,
+  "S": 83,
+  "UP": 38,
+  "DOWN": 40,
+}
   // Game Item Objects
-  var positionX = 0;
+  var positionX = 0; 
    var speedX = 0;
    var positionY = 0; 
    var speedY = 0; 
@@ -32,21 +38,37 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    
-
+    handleKeyDown(event);
+    repositionGameItem();
+    endGame();
+    doCollide(ball, leftPaddle);
+    factoryFunction(id);
+    handleKeyDownTwo(event);
   }
   
   /* 
   Called in response to events.
   */
   function handleKeyDown(event) {
-      
-        if (event.which === KEY.UP) {
-            speedY = -5;
+        console.log("handleKeyDown")  
+        if (event.which === KEY.UP) {   
+            rightPaddle.Y = -5;
             console.log("up pressed");
         }
         else if (event.which === KEY.DOWN) {
-            speedY = 5;
+            rightPaddle.speedY = 5;
+            console.log("down pressed");
+
+        }
+
+        function handleKeyDownTwo(event) {
+      
+        if (event.which === KEY.W) {
+            leftPaddle.y = -5;
+            console.log("up pressed");
+        }
+        else if (event.which === KEY.S) {
+            leftPaddle.y = 5;
             console.log("down pressed");
 
         }
