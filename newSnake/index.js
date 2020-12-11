@@ -115,7 +115,7 @@ function doCollideTwo(){
     if(positionX === apple.x && positionY === apple.y){
         console.log(apple.y, positionY)
         addNewSnakeToBoard();
-        return moveApple() 
+        return moveApple();
     }
 }
 //makeSnake
