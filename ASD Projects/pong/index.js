@@ -16,25 +16,18 @@ function runProgram(){
   "UP": 38,
   "DOWN": 40,
 }
-  // Game Item Objects
-   var positionX = 0; 
-   var speedX = 0;
-   var positionY = 0; 
-   var speedY = 0; 
-   var rightPositionX = 420
-   var rightPositionY = 100
-   var rightSpeedY = 0
-   var rightSpeedX = 0
-   var leftPositionX = 0
-   var leftPositionY = 100
-   var leftSpeedY = 0
-   var leftSpeedX = 0
+  // Game Item Objects 
    var ball = factoryFunction("#ball");
    var leftPaddle = factoryFunction("#leftPaddle");
    var rightPaddle = factoryFunction("#rightPaddle");
-   
+   var boardWidth = $('div').width();
+   var boardHeight = $('div').height();
    ball.speedX = Math.random() * 10 - 5;
    ball.speedY = Math.random() * 10 - 5;
+   var score1 =  0 + 1;
+   var score2 = 0 + 1;
+
+
   // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second) 
   $(document).on('keydown', handleKeyDown);    
@@ -57,6 +50,11 @@ function runProgram(){
     repositionGameItem();
     doCollide(ball, leftPaddle);
     redrawGameItem();
+    doCollideBoard();
+    doCollidePaddles();
+    doCollideTwo();
+    doCollide3();
+     scores();
     
   }
   
@@ -66,11 +64,11 @@ function runProgram(){
     function handleKeyDown(event) {
         console.log("handleKeyDown")  
         if (event.which === KEY.UP) {   
-            rightSpeedX -= 5;
+            rightPaddle.speedY -= 5;
             console.log("up pressed");
         }
         else if (event.which === KEY.DOWN) {
-            rightSpeedX += 5;
+            rightPaddle.speedY += 5;
             console.log("down pressed");
 
         }
@@ -78,11 +76,11 @@ function runProgram(){
         function handleKeyDownTwo(event) {
       
             if (event.which === KEY.W) {
-                speedY -= 5;
+                leftPaddle.speedY -= 5;
                 console.log("up pressed");
             }
             else if (event.which === KEY.S) {
-                speedY += 5;
+                leftPaddle.speedY += 5;
                 console.log("down pressed");
 
             }
@@ -90,20 +88,20 @@ function runProgram(){
 
          function handleKeyUp(event) {
             if (event.which === KEY.W) {
-                speedX = 0;
+                leftPaddle.speedY = 0;
                 console.log("up pressed");
             }
 
             else if (event.which === KEY.S) {
-                speedX = 0;
+                leftPaddle.speedY = 0;
             console.log("down pressed");
             }
             else if (event.which === KEY.UP) {
-                speedY = 0;
+                rightPaddle.speedY = 0;
             console.log("up pressed");
             }
             else if (event.which === KEY.DOWN) {
-                speedY = 0;
+                 rightPaddle.speedY = 0;
             console.log("down pressed");
             
             } 
@@ -111,40 +109,56 @@ function runProgram(){
 
             // ball collides board
         function doCollideBoard(){
-            if(ball.x > 440){
-                endGame();
-            }
-            else if(ball.x < 0){
-               endGame();
-            }
-            else if(ball.y > 440){
-                endGame();
-            }
-                else if(ball.y < 0){
-                endGame();
-            }
+           if (ball.x > boardWidth){
+               ball.speedX *= -1;
+                console.logscore1 += 1;
+               $('#score1').text(score1);
+           }
+           if(ball.x < 0){
+              ball.speedX *= -1;
+               score2 += 1;
+               $('#score2').text(score2);
+           }
+           
+           if (ball.y > boardHeight || ball.y < 0){
+               ball.speedY *= -1;
+           }
+
         }
 
         // paddles collide board
         function doCollidePaddles(){
 
-        if(rightPaddle.positionY > 440){
-         rightPaddle.positionY = 440;
-    }
-     else if(rightPaddle.positionY < 0){
-        rightPaddle.positionY = 0
-    }
-}
+            if(rightPaddle.y > boardHeight){
+                rightPaddle.y = boardHeight;
+            }
+            else if(rightPaddle.y < 0){
+                rightPaddle.y = 0
+            }
+            else if(leftPaddle.y > boardHeight){
+                leftPaddle.y = boardHeight;
+            }
+            else if(leftPaddle.y < 0){
+                leftPaddle.y = 0
+            }
+        }
 
         
             
            // ball collides paddles
         function doCollideTwo(){
-            if(positionX === ball.x && positionY === ball.y){
-                console.log(ball.y, positionY)
-                
-                // **make it return
+            if(leftPaddle.x === ball.x && leftPaddle.y === ball.y){
+                ball.speedX *= -1;
+                ball.speedY *= -1;
             }  
+        }
+
+
+        function doCollide3(){
+          if(rightPaddle.x === ball.x && rightPaddle.y === ball.y){
+                ball.speedX *= -1;
+                ball.speedY *= -1;
+            } 
         }
 
    
@@ -158,42 +172,50 @@ function runProgram(){
         obj.speedX = 0;
         obj.speedY = 0;
         return obj;
+
    }
 
+
+   
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
     function repositionGameItem() {
-      positionX += speedX
-      positionY += speedY
-      rightPositionY += rightSpeedX
-      rightPositionX += rightSpeedY
+      leftPaddle.x += leftPaddle.speedX
+      leftPaddle.y += leftPaddle.speedY
+      rightPaddle.x += rightPaddle.speedX
+      rightPaddle.y += rightPaddle.speedY
       ball.x += ball.speedX
       ball.y += ball.speedY
     //   console.log(ball.x)
   }
 
     function moveBall(){
-        if(handleKeyDown){
         
             ball.speedX = Math.random() * 10 - 5;
             ball.speedY = Math.random() * 10 - 5;
-        }
-        else if(handleKeyDownTwo){ 
-            ball.speedX = Math.random() * 10 - 5;
-            ball.speedY = Math.random() * 10 - 5;
-        }
+        
     }
 
+
+  function scores(){
+      if( score1 === 10){
+         endGame();
+            }
+     if(score2 === 10){
+        endGame(); 
+            }
+        }
+
+
     function redrawGameItem() {
-        $("#rightPaddle").css("left", rightPositionX);
-        $("#rightPaddle").css("top", rightPositionY);
-        $("#leftPaddle").css("left", positionX);
-        $("#leftPaddle").css("top", positionY);
+        $("#rightPaddle").css("left", rightPaddle.x);
+        $("#rightPaddle").css("top", rightPaddle.y);
+        $("#leftPaddle").css("left", leftPaddle.x);
+        $("#leftPaddle").css("top", leftPaddle.y);
         $("#ball").css("left",ball.x);
         $("#ball").css("top", ball.y);
-        console.log(rightPositionY, rightPaddle.speedY)
     }
 
   function endGame() {
@@ -228,6 +250,8 @@ function runProgram(){
         }
     }
 
+    
+
     function factoryFunction(id) {
         var ball = {};
         ball.id = id
@@ -235,7 +259,7 @@ function runProgram(){
         ball.height = $(id).height();
         ball.x = Number($(id).css('left').replace(/[^-\d\.]/g, ''));
         ball.y = Number($(id).css('top').replace(/[^-\d\.]/g, ''));
-        ball.speedX = 1
+        ball.speedX = 0
         ball.speedY = 0
         return ball;
     }
