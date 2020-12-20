@@ -24,8 +24,8 @@ function runProgram(){
    var boardHeight = $('div').height();
    ball.speedX = Math.random() * 10 - 5;
    ball.speedY = Math.random() * 10 - 5;
-   var score1 =  0 + 1;
-   var score2 = 0 + 1;
+   var score1 =  0;
+   var score2 = 0;
 
 
   // one-time setup
@@ -111,12 +111,12 @@ function runProgram(){
         function doCollideBoard(){
            if (ball.x > boardWidth){
                ball.speedX *= -1;
-                console.logscore1 += 1;
+                console.log(score1 += 1);
                $('#score1').text(score1);
            }
            if(ball.x < 0){
               ball.speedX *= -1;
-               score2 += 1;
+               console.log(score2 += 1);
                $('#score2').text(score2);
            }
            
@@ -147,7 +147,7 @@ function runProgram(){
             
            // ball collides paddles
         function doCollideTwo(){
-            if(leftPaddle.x === ball.x && leftPaddle.y === ball.y){
+            if(leftPaddle.y  < ball.y && leftPaddle.x  < ball.x ){
                 ball.speedX *= -1;
                 ball.speedY *= -1;
             }  
@@ -155,7 +155,7 @@ function runProgram(){
 
 
         function doCollide3(){
-          if(rightPaddle.x === ball.x && rightPaddle.y === ball.y){
+          if(rightPaddle.y < ball.y && rightPaddle.x  < ball.x){
                 ball.speedX *= -1;
                 ball.speedY *= -1;
             } 

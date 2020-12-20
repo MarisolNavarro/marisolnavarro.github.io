@@ -12,7 +12,8 @@ function runProgram(){
 
   var BOARD_SIZE = $("#board").width();   // the height and width are equal
   var SQUARE_SIZE = $("#apple").width();  // the size of the apple is the same size as all squares
-
+   var score1 =  0;
+  
 
   var KEY = {
     "LEFT": 37,
@@ -23,7 +24,7 @@ function runProgram(){
     
   
   // Game Item Objects
-    var positionX = 200; // the x-coordinate location for the box
+   var positionX = 200; // the x-coordinate location for the box
    var speedX = 0;
    var positionY = 200; // the y-coordinate location for the box
    var speedY = 0; 
@@ -60,7 +61,7 @@ console.log(snake);
     doCollide();
     redrawGameItem();
     doCollideTwo();
-    factoryFunction("#snake0");
+    snakeCollide();
     // moveApple();
     
   }
@@ -116,6 +117,8 @@ function doCollideTwo(){
         console.log(apple.y, positionY)
         addNewSnakeToBoard();
         return moveApple();
+        console.log(score1 += 1);
+       $('#score1').text(score1);
     }
 }
 //makeSnake
@@ -129,7 +132,8 @@ function addNewSnakeToBoard() {
 	$("<div>")
 		.addClass("snake")
 		.attr('id', newID)
-		.appendTo("#board");
+        .appendTo("#board");
+        
     
     // Create a new ball object using the Ball factory
 	// function, using the newID. We need to 
@@ -143,8 +147,8 @@ function makeSnake(id){
   newPiece.id = id;
   newPiece.width = $(".snake").width();        // sets width to 200
   newPiece.height = $(".snake").height();
-  newPiece.x = 0;
-  newPiece.y = 0;
+  newPiece.x = snake.length-1;
+  newPiece.y = snake.length-1;
   return newPiece;
 }
 //moveApple
@@ -159,6 +163,15 @@ apple.$element.css("left", apple.x);
 			moveApple();
           break;
 		}
+    }
+
+    function snakeCollide(){
+        if(snake.y === newPiece.y || snake.x === newPiece.x ){
+        endGame();
+        if(doCollide){
+        endGame();
+        }
+    }
     }
     
 }

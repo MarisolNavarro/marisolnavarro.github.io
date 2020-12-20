@@ -29,6 +29,18 @@ body {
 /*   top: 100px;  */  /* Uncomment if you want to set a "starting" position */
 }
 
+#score1 {
+    width: 60px;
+    height: 40px;
+    top: 450px ;
+    left: 0px;
+    font: arial;
+    color: black;
+    background-color: white;
+    position: absolute;
+
+}
+
 .snake {
   background-color: teal;
   width: 20px;
