@@ -43,12 +43,12 @@ return param
 */
 var array =["a","b","c"];
 _.indexOf = function(arrayName){
-    for(var i = 1; i < arrayName.length; i++){
+    for(var i = 0; i < arrayName.length; i++){
         var element = arrayName[i];
         if (element === arrayName){
         return element;
         }
-        return  '-1';
+        return  -1;
         console.log(result);
     }
     
