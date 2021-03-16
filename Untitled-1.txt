@@ -1,0 +1,9 @@
+
+ function(req, res){
+  // handle response
+ res.writeHeader();
+
+  res.write();
+  
+  res.end();
+ } 

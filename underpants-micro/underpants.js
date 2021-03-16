@@ -41,20 +41,20 @@ return param
 *   _.indexOf(["a","b","c"], "c") -> 2
 *   _.indexOf(["a","b","c"], "d") -> -1
 */
-var array =["a","b","c"];
-_.indexOf = function(arrayName){
+var arrayName =["a","b","c"];
+_.indexOf = function(arrayName, element){
     for(var i = 0; i < arrayName.length; i++){
-        var element = arrayName[i];
-        if (element === arrayName){
-        return element;
+        if (element === arrayName[i]){
+            return i;
         }
-        return  -1;
+
         console.log(result);
     }
+    return  -1
     
 }
 
-var result = _.indexOf(array);
+var result = _.indexOf(["a","b","c"],"d");
 
 
 /** _.contains
@@ -71,9 +71,21 @@ var result = _.indexOf(array);
 * Examples:
 *   _.contains([1,"two", 3.14], "two") -> true
 */
-_.contains = function(){
-    
+var arrayName =[1, 2, 3]
+
+_.contains = function(arrayName, element){
+    for(var i = 0; i < arrayName.length; i++){
+
+        if (element === arrayName[i]){
+            return true;
+        }
+
+        console.log(result);
+    }
+    return false
 }
+
+var result = _.contains([1, 2, 3], 2, 4);
 
 
 /** _.each
@@ -88,11 +100,23 @@ _.contains = function(){
 *   _.each(["a","b","c"], function(e,i,a){ console.log(e)});
 *      -> should log "a" "b" "c" to the console
 */
-_.each = function(){
+
+
+
+_.each = function(collection, func){
+       if(Array.isArray(collection)){     //
+
+        for( var i = 0; collection.length > i; i++){
+        func(collection[i], i, collection)
+        }
+    } 
+
+};
+
+
     
-}
 
-
+   
 /** _.filter
 * Arguments:
 *   1) An array
@@ -108,7 +132,14 @@ _.each = function(){
 * Challenge:
 *   use _.each in your implementation
 */
-_.filter = function(){
+_.filter = function(array, func){
+    for(var i = 0; i < array.length; i++) {
+    return func();
+
+    arrayTwo = [a, b, c]
+        func();
+    
+    }
     
 }
 
@@ -126,7 +157,14 @@ _.filter = function(){
 * Examples:
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
-_.reject = function(){
+_.reject = function(array, func){
+    for(var i = 0; i < array.length; i++) {
+        return func();
+
+    const newArray = [];
+
+    return newArray;
+        }
     
 }
 
@@ -144,8 +182,14 @@ _.reject = function(){
 * Examples:
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
-_.map = function(){
-    
+_.map = function(collection, func){
+    if(Array.isArray(collection)){     //
+
+        for( var i = 0; collection.length > i; i++){
+        func(collection[i], i, collection)
+        }
+    } 
+
 }
 
 
